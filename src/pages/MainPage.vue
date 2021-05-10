@@ -1,0 +1,124 @@
+<template>
+  <main class="content container">
+    <div class="content__top content__top--catalog">
+      <h1 class="content__title">Каталог</h1>
+      <span class="content__info">
+        {{ countProductsString }}
+      </span>
+    </div>
+    <div class="content__catalog">
+      <!-- <ProductFilter :priceFrom.sync="filterPriceFrom" :priceTo.sync="filterPriceTo" :categoryId.sync="filterCategory" :colorId.sync="filterColor"/> -->
+      <section class="catalog">
+        <div v-if="productsLoading">
+          <LoaderInfo title="Загрузка товаров" />
+        </div>
+        <div v-if="productsLoadingFailed">
+          <LoaderErrorInfo
+            title="Ошибка при загрузке товаров..."
+            v-on:reload="reload"
+          />
+        </div>
+        <ProductList :products="products" />
+        <AppPagination
+          v-model="page"
+          :count="countProducts"
+          :per-page="productsPerPage"
+        />
+      </section>
+    </div>
+  </main>
+</template>
+
+<script>
+import ProductList from "@/components/Product/ProductList.vue";
+import AppPagination from "@/components/App/AppPagination.vue";
+// import ProductFilter from '@/components/Product/ProductFilter.vue'
+import LoaderInfo from "@/components/Loaders/LoaderInfo.vue";
+import LoaderErrorInfo from "@/components/Loaders/LoaderErrorInfo.vue";
+// import axios from 'axios'
+// import { API_BASE } from '@/config'
+import { mapActions, mapGetters } from "vuex";
+import getNumEnding from "@/helpers/getNumEnding";
+
+export default {
+  components: {
+    ProductList,
+    AppPagination,
+    // ProductFilter,
+    LoaderInfo,
+    LoaderErrorInfo,
+  },
+  watch: {
+    countProducts() {
+      this.page = 1;
+    },
+    filterPriceFrom() {
+      this.loadProducts();
+    },
+    filterPriceTo() {
+      this.loadProducts();
+    },
+    filterCategory() {
+      this.loadProducts();
+    },
+    filterColor() {
+      this.loadProducts();
+    },
+    page() {
+      this.loadProducts();
+    },
+  },
+  computed: {
+    page: {
+      get: function () {
+        return this.$store.state.catalog.page;
+      },
+      set: function (value) {
+        this.$store.commit("catalog/setPage", value);
+      },
+    },
+    ...mapGetters("catalog", {
+      productsData: "getProductsData",
+      productsLoading: "getProductsLoading",
+      productsLoadingFailed: "getProductsLoadingFailed",
+      currentPage: "getPage",
+      productsPerPage: "getProductsPerPage",
+      countProducts: "getCountProducts",
+    }),
+    countProductsString() {
+      return (
+        this.countProducts +
+        " " +
+        getNumEnding(this.countProducts, ["товар", "товара", "товаров"])
+      );
+    },
+    products() {
+      // return this.productsData
+      //   ? this.productsData.items.map((product) => {
+      //       return {
+      //         ...product,
+      //         // image: product.image.file.url
+      //         image: product.colors[0].gallery[0].file.url,
+      //       };
+      //     })
+      //   : [];
+      return this.productsData ? this.productsData.items : [];
+    },
+  },
+  methods: {
+    ...mapActions("catalog", ["loadProducts"]),
+    reload() {
+      this.loadProducts();
+    },
+  },
+  created() {
+    this.loadProducts();
+  },
+};
+</script>
+<style scoped>
+.errLink {
+  text-decoration: underline;
+  cursor: pointer;
+}
+</style>
