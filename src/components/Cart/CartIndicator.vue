@@ -7,10 +7,10 @@
             <img src='../../../public/img/icons/error.png' width='30'/>
         </div>
         <div v-else>
-            <svg width="30" height="21" fill="currentColor">
+            <svg width="19" height="24">
                 <use xlink:href="#icon-cart"></use>
             </svg>
-            <span class="header__count" aria-label="Количество товаров">{{ $store.state.cartProducts.length }}</span>
+            <span class="header__count" aria-label="Количество товаров">{{ amount }}</span>
         </div>    
     </router-link>
 </template>
@@ -19,7 +19,12 @@ import { mapGetters} from 'vuex'
 export default {
     name: 'CartIndicator',
     computed: {
-      ...mapGetters(['cartLoading', 'cartLoadingError']),
+      ...mapGetters("cart", { cartLoading: 'getCartLoading', 
+                              cartLoadingError: 'getCartLoadingError',
+                              cartProducts: 'getCartProducts' }),
+      amount() {
+          return this.cartProducts ? this.cartProducts.length : ""
+      }                          
     },  
 }
 </script>

@@ -6,9 +6,14 @@ export default {
     filterPriceFrom: 0,
     filterPriceTo: 0,
     filterCategory: 0,
-    filterColor: "",
+//    filterColor: "",
+    filterSeasons: [],
+    filterMaterials: [],
+    
     page: 1,
     productsPerPage: 6,
     productsData: null,
-
+    seasons: null,
+    productCategories: null,
+    materials: null,
 };

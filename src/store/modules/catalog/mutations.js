@@ -14,9 +14,15 @@ export default {
   setFilterCategory(state, value) {
     state.filterCategory = value;
   },
-  setFilterColor(state, value) {
-    state.filterColor = value;
+  setFilterSeasons(state, value) {
+    state.filterSeasons = value;
   },
+  setFilterMaterials(state, value) {
+    state.filterMaterials = value;
+  },
+  // setFilterColor(state, value) {
+  //   state.filterColor = value;
+  // },
   setPage(state, value) {
     state.page = value;
   },
@@ -25,5 +31,14 @@ export default {
   },
   setProductsData(state, value) {
     state.productsData = value;
+  },
+  setSeasons(state, value) {
+    state.seasons = value;
+  },
+  setProductCategories(state, value) {
+    state.productCategories = value
+  },
+  setMaterials(state, value) {
+    state.materials = value
   },
 };

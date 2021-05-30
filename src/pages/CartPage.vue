@@ -27,31 +27,32 @@
         {{ cartCount }}
       </span>
         </div>
+    <section class="cart">
+      <form class="cart__form form" action="#" method="POST">
+        <div class="cart__field">
+            <ul class="cart__list">
+                <CartItem v-for="item in products" :key="item.productId" :item="item"/>
+            </ul>
+        </div>
 
-        <section class="cart">
-            <form class="cart__form form" action="#" method="POST">
-                <div class="cart__field">
-                    <ul class="cart__list">
-                        <CartItem v-for="item in products" :key="item.productId" :item="item"/>
-                    </ul>
-                </div>
+        <div class="cart__block">
+          <p class="cart__desc">
+            Мы&nbsp;посчитаем стоимость доставки на&nbsp;следующем этапе
+          </p>
+          <p class="cart__price">
+            Итого: <span>{{ totalPrice | numberFormat }} ₽</span>
+          </p>
 
-                <div class="cart__block">
-                    <p class="cart__desc">
-                        Мы&nbsp;посчитаем стоимость доставки на&nbsp;следующем этапе
-                    </p>
-                    <p class="cart__price">
-                        Итого: <span>{{ totalPrice | numberFormat }} ₽</span>
-                    </p>
-
-                    <router-link tag="button" :to="{name: 'order'}" v-show="cartPositionsCount" class="cart__button button button--primery" type="submit">
-                        Оформить заказ
+                     <router-link tag="button" :to="{name: 'order'}" v-show="cartPositionsCount" class="cart__button button button--primery" type="submit">
+                         Оформить заказ
                     </router-link>
-                </div>
-            </form>
-        </section>
+        </div>
+      </form>
+    </section>
+
     </main>
 </template>
+
 <script>
 import numberFormat from '@/helpers/numberFormat'
 import { mapGetters, mapActions} from 'vuex'
@@ -66,11 +67,11 @@ export default {
       numberFormat
     },
     computed: {
-      ...mapGetters({products: 'cartDetailProducts', 
+      ...mapGetters("cart", {products: 'cartDetailProducts', 
                     totalPrice: 'cartTotalPrice',
                     cartPositionsCount: 'cartPositionsCount', 
-                    cartLoading: 'cartLoading', 
-                    cartLoadingError: 'cartLoadingError'}),
+                    cartLoading: 'getCartLoading', 
+                    cartLoadingError: 'getCartLoadingError'}),
       cartCount() {
         return this.cartPositionsCount + ' ' + getNumEnding(this.cartPositionsCount, ['товар', 'товара', 'товаров'])
       }                    

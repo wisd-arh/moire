@@ -14,8 +14,14 @@ export default {
   getFilterCategory(state) {
     return state.filterCategory;
   },
-  getFilterColor(state) {
-    return state.filterColor;
+  // getFilterColor(state) {
+  //   return state.filterColor;
+  // },
+  getFilterSeasons(state) {
+    return state.filterSeasons;
+  },
+  getFilterMaterials(state) {
+    return state.filterMaterials;
   },
   getPage(state) {
     return state.page;
@@ -29,4 +35,13 @@ export default {
   getCountProducts(state) {
     return state.productsData ? state.productsData.pagination.total : 0
   },
+  getSeasons(state) {
+    return state.seasons ? state.seasons.items : [];
+  },
+  getProductCategories(state) {
+    return state.productCategories ? state.productCategories.items : []
+  },
+  getMaterials(state) {
+    return state.materials ? state.materials.items : []
+  }
 };

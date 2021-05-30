@@ -16,8 +16,11 @@
         </li>
       </ul>
 
-      <h1 class="content__title">Корзина</h1>
-      <span class="content__info"> 3 товара </span>
+      <div class="content__row">
+        <h1 class="content__title">
+          Оформление заказа
+        </h1>
+      </div>
     </div>
 
     <section class="cart">
@@ -41,7 +44,7 @@
                     type="radio"
                     name="delivery"
                     value="0"
-                    checked=""
+                    v-model="formData.deliveryTypeId"
                   />
                   <span class="options__value">
                     Самовывоз <b>бесплатно</b>
@@ -55,6 +58,7 @@
                     type="radio"
                     name="delivery"
                     value="500"
+                    v-model="formData.deliveryTypeId"
                   />
                   <span class="options__value"> Курьером <b>500 ₽</b> </span>
                 </label>
@@ -70,6 +74,7 @@
                     type="radio"
                     name="pay"
                     value="card"
+                    v-model="formData.paymentTypeId"
                   />
                   <span class="options__value"> Картой при получении </span>
                 </label>
@@ -80,6 +85,7 @@
                     class="options__radio sr-only"
                     type="radio"
                     name="pay"
+                    v-model="formData.paymentTypeId"
                     value="cash"
                   />
                   <span class="options__value"> Наличными при получении </span>
@@ -129,14 +135,17 @@ export default {
     filters: { numberFormat },
     data() {
         return {
-            formData: {},
+            formData: {
+              "deliveryTypeId": "0",
+              "paymentTypeId": "card",              
+            },
             formError: {},
             formErrorMessage: '',
             loading: false,
         }
     },
     computed: {
-      ...mapGetters(['cartDetailProducts', 'cartTotalPrice', 'cartPositionsCount']),
+      ...mapGetters("cart", ['cartDetailProducts', 'cartTotalPrice', 'cartPositionsCount']),
       infoString() {
         return getNumEnding(this.cartPositionsCount, ['товар', 'товара', 'товаров'])
       },
@@ -156,6 +165,9 @@ export default {
         .then(response => { 
             this.$store.commit('resetCart')
             this.formData = {}    
+            this.formData.deliveryTypeId = 0
+            this.formData.paymentTypeId = 0              
+
             this.$store.commit('updateOrderInfo', response.data)
             this.$router.push({name: 'orderInfo', params: { id: response.data.id }})
         })
