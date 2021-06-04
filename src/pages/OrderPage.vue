@@ -37,30 +37,18 @@
           <div class="cart__options">
             <h3 class="cart__title">Доставка</h3>
             <ul class="cart__options options">
-              <li class="options__item">
+              <li class="options__item" v-for="delivery in deliveries" :key="delivery.id">
                 <label class="options__label">
                   <input
                     class="options__radio sr-only"
                     type="radio"
                     name="delivery"
-                    value="0"
-                    v-model="formData.deliveryTypeId"
+                    :value="delivery.id"
+                    v-model.number="formData.deliveryTypeId"
                   />
                   <span class="options__value">
-                    Самовывоз <b>бесплатно</b>
+                    {{ delivery.title }} <b>{{ delivery_price(delivery.id) }}</b>
                   </span>
-                </label>
-              </li>
-              <li class="options__item">
-                <label class="options__label">
-                  <input
-                    class="options__radio sr-only"
-                    type="radio"
-                    name="delivery"
-                    value="500"
-                    v-model="formData.deliveryTypeId"
-                  />
-                  <span class="options__value"> Курьером <b>500 ₽</b> </span>
                 </label>
               </li>
             </ul>
@@ -101,7 +89,7 @@
           </ul>
 
           <div class="cart__total">
-            <p>Доставка: <b>500 ₽</b></p>
+            <p>Доставка: <b>{{ delivery_price(formData.deliveryTypeId) }}</b></p>
             <p>Итого: <b>{{ cartPositionsCount }}</b> {{ infoString }} на сумму <b>{{ cartTotalPrice | numberFormat }} ₽</b></p>
           </div>
 
@@ -123,7 +111,7 @@
 import AppFormText from '@/components/App/AppFormText.vue'
 import AppFormTextarea from '@/components/App/AppFormText.vue'
 import CartProductInfo from '@/components/Cart/CartProductInfo.vue'
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import numberFormat from '@/helpers/numberFormat'
 import getNumEnding from '@/helpers/getNumEnding'
 import axios from 'axios'
@@ -136,7 +124,7 @@ export default {
     data() {
         return {
             formData: {
-              "deliveryTypeId": "0",
+              "deliveryTypeId": 0,
               "paymentTypeId": "card",              
             },
             formError: {},
@@ -145,12 +133,21 @@ export default {
         }
     },
     computed: {
-      ...mapGetters("cart", ['cartDetailProducts', 'cartTotalPrice', 'cartPositionsCount']),
+      ...mapGetters("cart", ['cartDetailProducts', 'cartTotalPrice', 'cartPositionsCount', 'getDeliveryData']),
       infoString() {
         return getNumEnding(this.cartPositionsCount, ['товар', 'товара', 'товаров'])
       },
+      deliveries() {
+        return this.getDeliveryData ? this.getDeliveryData : []
+      },
     },
     methods: {
+      ...mapActions("cart", ["loadDeliveryData"]),
+      delivery_price(id) {
+        let delivery = this.deliveries.find(del => { return del.id === id }) 
+        if (delivery)
+          return delivery.price == 0 ? "бесплатно" : delivery.price + " ₽"
+      },
       order() {
         this.loading = true
         this.formError = {}
@@ -176,6 +173,9 @@ export default {
             this.formError = error.response.data.error.request || {}})
         .then(() => this.loading = false)  
       },
+    },
+    created() {
+      this.loadDeliveryData()
     }
 }
 </script>

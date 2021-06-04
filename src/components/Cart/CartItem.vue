@@ -1,57 +1,37 @@
 <template>
-            <li class="cart__item product">
-              <div class="product__pic">
-                <img :src="item.product.color.gallery[0].file.url" width="120" height="120" :alt="item.product.title">
-              </div>
-              <h3 class="product__title">
-                {{ item.product.title }}
-              </h3>
-              <p class="product__info product__info--color">
-                Цвет: 
-                <span>
-                  <i :style="{'background-color': item.product.color.color.code}"></i>
-                  {{ item.product.color.color.title }}
-                </span>
-              </p>
-              <span class="product__code">
-                Артикул: {{ item.productId }}
-              </span>
+  <li class="cart__item product">
+    <div class="product__pic">
+      <img :src="item.product.color.gallery[0].file.url" width="120" height="120" :alt="item.product.title">
+    </div>
+    <h3 class="product__title">
+      {{ item.product.title }}
+    </h3>
+    <p class="product__info product__info--color">
+      Цвет: 
+      <span>
+        <i :style="{'background-color': item.product.color.color.code}"></i>
+        {{ item.product.color.color.title }}
+      </span>
+    </p>
+    <span class="product__code">
+      Артикул: {{ item.productId }}
+    </span>
 
-                <AppCounter class="product__counter form__counter" :amount.sync="amount"/>
+    <AppCounter class="product__counter form__counter" :amount.sync="amount"/>
 
-              <b class="product__price">
-                {{ (item.amount * item.product.price) | numberFormat }} ₽
-              </b>
+    <b class="product__price">
+      {{ (item.amount * item.product.price) | numberFormat }} ₽
+    </b>
 
-              <button class="product__del button-del" type="button" aria-label="Удалить товар из корзины" @click="deleteProduct(item.productId)">  <svg width="20" height="20" fill="currentColor">
-                  <use xlink:href="#icon-close"></use>
-                </svg>
-              </button>
-            </li>
+    <button class="product__del button-del" 
+      type="button" aria-label="Удалить товар из корзины" 
+      @click="deleteProduct(item.productId)">  
+        <svg width="20" height="20" fill="currentColor">
+          <use xlink:href="#icon-close"></use>
+        </svg>
+    </button>
+  </li>
 </template>
-    <li class="cart__item product">
-        <div class="product__pic">
-            <img :src="item.product.image" width="120" height="120" :alt="item.product.title">
-        </div>
-        <h3 class="product__title">
-            {{ item.product.title }}
-        </h3>
-        <span class="product__code">
-            Артикул: {{ item.productId }}
-        </span>
-
-        <AppCounter class="product__counter form__counter" :amount.sync="amount"/>
-
-        <b class="product__price">
-            {{ (item.amount * item.product.price) | numberFormat }} ₽
-        </b>
-
-        <button class="product__del button-del" type="button" aria-label="Удалить товар из корзины" @click="deleteProduct(item.productId)">
-            <svg width="20" height="20" fill="currentColor">
-                <use xlink:href="#icon-close"></use>
-            </svg>
-        </button>
-    </li>
 
 <script>
 import numberFormat from '@/helpers/numberFormat'
@@ -59,24 +39,24 @@ import { mapActions } from 'vuex'
 import AppCounter from '@/components/App/AppCounter.vue'
 
 export default {
-    name: 'CartItem',
-    props: ['item'],
-    components: {AppCounter},
-    filters: {
-        numberFormat,
-    },
-    computed: {
-        amount: {
-            get() {
-                return this.item.amount
-            },
-            set(value) {
-                this.$store.dispatch('cart/updateCartProductAmount', {productId: this.item.productId, amount: value})
-            }
-        }
-    },
-    methods: {
-        ...mapActions("cart", {deleteProduct : 'removeCartProduct'})
+  name: 'CartItem',
+  props: ['item'],
+  components: {AppCounter},
+  filters: {
+      numberFormat,
+  },
+  computed: {
+    amount: {
+      get() {
+        return this.item.amount
+      },
+      set(value) {
+        this.$store.dispatch('cart/updateCartProductAmount', {productId: this.item.productId, amount: value})
+      }
     }
+  },
+  methods: {
+    ...mapActions("cart", {deleteProduct : 'removeCartProduct'})
+  }
 }
 </script>

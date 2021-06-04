@@ -2,10 +2,9 @@
   <li class="catalog__item">
     <router-link
       class="catalog__pic"
-      :to="{ name: 'product', params: { id: product.id } }"
-    >
-      <!-- <img :src="product.image" :alt="product.title"> -->
-      <img :src="image" :alt="product.title" />
+      :to="{ name: 'product', params: { id: product.id } }">
+        <img :src="image" :alt="product.title" 
+    />
     </router-link>
 
     <h3 class="catalog__title">
@@ -33,9 +32,9 @@
 </template>
 
 <script>
-import ColorPicker from "../App/AppColorPicker.vue";
-import gotoPage from "@/helpers/gotoPage";
-import numberFormat from "@/helpers/numberFormat";
+import ColorPicker from "../App/AppColorPicker.vue"
+import gotoPage from "@/helpers/gotoPage"
+import numberFormat from "@/helpers/numberFormat"
 
 export default {
   components: {
@@ -57,7 +56,6 @@ export default {
       return this.product.colors[colorId].gallery
         ? this.product.colors[colorId].gallery[0].file.url
         : "/img/noImage.jpg";
-      //  return '/img/noImage.jpg'
     },
   },
   data() {
@@ -72,14 +70,15 @@ export default {
     gotoPage,
     addToCart(id) {
       this.$store.dispatch("addProductToCart", { productId: id, amount: 1 });
-      this.$refs.info.classList.toggle("hidden");
+      this.$refs.info.classList.toggle("hidden")
       setTimeout(() => {
-        this.$refs.info.classList.toggle("hidden");
+        this.$refs.info.classList.toggle("hidden")
       }, 2000);
     },
   },
-};
+}
 </script>
+
 <style scoped>
 .fl_container {
   display: flex;

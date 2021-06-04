@@ -1,5 +1,3 @@
-import state from "./state"
-
 export default {
     getProductData(state) {
         return state.productData

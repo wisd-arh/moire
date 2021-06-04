@@ -1,14 +1,14 @@
 <template>
-<label class="form__label">
+  <label class="form__label">
     <slot/>
     <span class="form__value">{{ title }}</span>
     <span class="form__error" v-if="error">{{ error }}</span>
-</label>    
+  </label>    
 </template>
+
 <script>
 export default {
-    name: 'AppFormField',
-    props: ['title', 'error'],
-    
+  name: 'AppFormField',
+  props: ['title', 'error']
 }
 </script>

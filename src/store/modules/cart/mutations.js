@@ -32,5 +32,8 @@ export default {
     updateLoadingStatus(state, {loading, error}) {
         state.cartLoading = loading
         state.cartLoadingError = error
-    }
+    },
+    setDeliveryData(state, value) {
+        state.deliveryData = value
+    },
 }

@@ -144,9 +144,3 @@ export default {
   },
 };
 </script>
-<style scoped>
-.errLink {
-  text-decoration: underline;
-  cursor: pointer;
-}
-</style>

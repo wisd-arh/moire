@@ -8,6 +8,9 @@ export default {
     getCartProducts(state) {
         return state.cartProducts
     },
+    getDeliveryData(state) {
+        return state.deliveryData
+    },
     getOrderInfo(state) {
         return state.orderInfo
     },

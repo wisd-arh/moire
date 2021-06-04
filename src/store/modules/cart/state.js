@@ -5,4 +5,5 @@ export default {
     cartLoading: false,
     cartLoadingError: false,
     orderInfo: null,
+    deliveryData: null,
 }
