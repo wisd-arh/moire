@@ -55,28 +55,17 @@
 
             <h3 class="cart__title">Оплата</h3>
             <ul class="cart__options options">
-              <li class="options__item">
+
+              <li class="options__item" v-for="payment in currentPayments" :key="payment.id">
                 <label class="options__label">
                   <input
                     class="options__radio sr-only"
                     type="radio"
                     name="pay"
-                    value="card"
+                    :value="payment.id"
                     v-model="formData.paymentTypeId"
                   />
-                  <span class="options__value"> Картой при получении </span>
-                </label>
-              </li>
-              <li class="options__item">
-                <label class="options__label">
-                  <input
-                    class="options__radio sr-only"
-                    type="radio"
-                    name="pay"
-                    v-model="formData.paymentTypeId"
-                    value="cash"
-                  />
-                  <span class="options__value"> Наличными при получении </span>
+                  <span class="options__value"> {{ payment.title }} </span>
                 </label>
               </li>
             </ul>
@@ -111,7 +100,7 @@
 import AppFormText from '@/components/App/AppFormText.vue'
 import AppFormTextarea from '@/components/App/AppFormText.vue'
 import CartProductInfo from '@/components/Cart/CartProductInfo.vue'
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import numberFormat from '@/helpers/numberFormat'
 import getNumEnding from '@/helpers/getNumEnding'
 import axios from 'axios'
@@ -133,16 +122,27 @@ export default {
         }
     },
     computed: {
-      ...mapGetters("cart", ['cartDetailProducts', 'cartTotalPrice', 'cartPositionsCount', 'getDeliveryData']),
+      ...mapGetters("cart", ['cartDetailProducts', 'cartTotalPrice', 'cartPositionsCount', 'getUserAccessKey']),
+      ...mapGetters("order", ['getDeliveryData', 'getPayments']),
       infoString() {
         return getNumEnding(this.cartPositionsCount, ['товар', 'товара', 'товаров'])
       },
       deliveries() {
         return this.getDeliveryData ? this.getDeliveryData : []
       },
+      currentPayments() {
+        var paymentsData = this.getPayments
+        if (paymentsData) {
+          var currentPaymentsItems = paymentsData.find((payment) => { 
+              return payment.deliveryTypeId === this.formData.deliveryTypeId})
+        }
+        return currentPaymentsItems ? currentPaymentsItems.items : []
+      },
     },
     methods: {
-      ...mapActions("cart", ["loadDeliveryData"]),
+      ...mapActions("order", ["loadDeliveryData", "loadPayments"]),
+      ...mapMutations("cart", ["resetCart"]),
+      ...mapMutations("order", ["updateOrderInfo"]),
       delivery_price(id) {
         let delivery = this.deliveries.find(del => { return del.id === id }) 
         if (delivery)
@@ -156,16 +156,16 @@ export default {
           ...this.formData
         }, {
           params: {
-            userAccessKey: this.$store.state.userAccessKey
+            userAccessKey: this.getUserAccessKey
           }
         })
         .then(response => { 
-            this.$store.commit('resetCart')
+            this.resetCart()
             this.formData = {}    
             this.formData.deliveryTypeId = 0
             this.formData.paymentTypeId = 0              
 
-            this.$store.commit('updateOrderInfo', response.data)
+            this.updateOrderInfo(response.data)
             this.$router.push({name: 'orderInfo', params: { id: response.data.id }})
         })
         .catch(error => {
@@ -176,6 +176,8 @@ export default {
     },
     created() {
       this.loadDeliveryData()
+        .then(() => { this.loadPayments() })
+      
     }
 }
 </script>

@@ -94,7 +94,7 @@
   </main>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import CartProductInfo from '@/components/Cart/CartProductInfo.vue'
 import LoaderInfo from '@/components/Loaders/LoaderInfo.vue'
 import numberFormat from '@/helpers/numberFormat'
@@ -109,8 +109,9 @@ export default {
     components: { CartProductInfo, LoaderInfo },
     filters: { numberFormat },
     computed: {
-        ...mapGetters({ orderInfo: 'getOrderInfo',
+        ...mapGetters("order", { orderInfo: 'getOrderInfo',
                         orderProducts: 'orderProducts' }),
+        ...mapGetters("cart", ["getUserAccessKey"]),
         orderPositionsCount() {
             return this.orderProducts ? this.orderProducts.length : 0
         },
@@ -122,12 +123,15 @@ export default {
         }
     },
     methods: {
+      ...mapActions("order", ["loadOrderInfo"]),
       loadOrderDetails() {
-        if (this.$store.state.orderInfo && (this.$store.state.orderInfo.id === this.$route.params.id)) {
+        var orderInfo = this.orderInfo
+        if (orderInfo && (orderInfo.id === this.$route.params.id)) {
             return;
         }
         this.loading = true
-        this.$store.dispatch('loadOrderInfo', this.$route.params.id)
+        this.loadOrderInfo({ orderId: this.$route.params.id, 
+                             userAccessKey: this.getUserAccessKey})
             .catch(() => { 
                 this.$router.replace({name: 'notFound', params: { '0': '/' }})
             })

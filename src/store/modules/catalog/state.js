@@ -6,7 +6,6 @@ export default {
     filterPriceFrom: 0,
     filterPriceTo: 0,
     filterCategory: 0,
-//    filterColor: "",
     filterSeasons: [],
     filterMaterials: [],
     

@@ -82,17 +82,4 @@ export default {
             })
         })    
     },
-    loadDeliveryData(context) {
-        return new Promise((resolve, reject) => {
-            axios.get(API_BASE + 'deliveries')
-            .then((response) => {
-                context.commit('setDeliveryData', response.data)
-                resolve()
-            })
-            .catch(() => { 
-                context.commit('setDeliveryData', null)
-                reject() 
-            })
-        })    
-    }
 }

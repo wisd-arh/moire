@@ -14,9 +14,6 @@ export default {
   getFilterCategory(state) {
     return state.filterCategory;
   },
-  // getFilterColor(state) {
-  //   return state.filterColor;
-  // },
   getFilterSeasons(state) {
     return state.filterSeasons;
   },
@@ -44,4 +41,4 @@ export default {
   getMaterials(state) {
     return state.materials ? state.materials.items : []
   }
-};
+}

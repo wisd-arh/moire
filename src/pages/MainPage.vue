@@ -41,8 +41,6 @@ import AppPagination from "@/components/App/AppPagination.vue";
 import ProductFilter from '@/components/Product/ProductFilter.vue'
 import LoaderInfo from "@/components/Loaders/LoaderInfo.vue";
 import LoaderErrorInfo from "@/components/Loaders/LoaderErrorInfo.vue";
-// import axios from 'axios'
-// import { API_BASE } from '@/config'
 import { mapActions, mapGetters } from "vuex";
 import getNumEnding from "@/helpers/getNumEnding";
 
@@ -67,9 +65,6 @@ export default {
     filterCategory() {
       this.loadProducts();
     },
-    // filterColor() {
-    //   this.loadProducts();
-    // },
     filterSeasons() {
       this.loadProducts();
     },
@@ -109,11 +104,6 @@ export default {
       get() { return this.$store.getters['catalog/getFilterMaterials'] },
       set(value) { this.$store.commit("catalog/setFilterMaterials", value);},
     }, 
-
-    // filterColor: {
-    //   get() { return this.$store.getters['catalog/getFilterColor'] },
-    //   set(value) { this.$store.commit("catalog/setFilterColor", value);},
-    // }, 
     ...mapGetters("catalog", {
       productsData: "getProductsData",
       productsLoading: "getProductsLoading",

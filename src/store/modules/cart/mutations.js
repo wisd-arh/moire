@@ -1,7 +1,4 @@
 export default {
-    updateOrderInfo(state, orderInfo) {
-        state.orderInfo = orderInfo
-    },
     resetCart(state) {
         state.cartProducts = []
         state.cartProductsData = []
@@ -32,8 +29,5 @@ export default {
     updateLoadingStatus(state, {loading, error}) {
         state.cartLoading = loading
         state.cartLoadingError = error
-    },
-    setDeliveryData(state, value) {
-        state.deliveryData = value
     },
 }

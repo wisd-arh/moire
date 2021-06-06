@@ -6,25 +6,22 @@ export default {
     context.commit('setProductsLoading', true)
     context.commit('setProductsLoadingFailed', false)
 
-//    clearTimeout(this.loadProductsTimer);
-    // this.loadProductsTimer = setTimeout(() => {
-      axios
-        .get(API_BASE + "products", {
-          params: {
-            page: context.state.page,
-            limit: context.state.productsPerPage,
-            categoryId: context.state.filterCategory,
-            minPrice: context.state.filterPriceFrom,
-            maxPrice: context.state.filterPriceTo,
-            colorIds: [],//context.state.filterColor,
-            materialIds: context.state.filterMaterials,
-            seasonIds: context.state.filterSeasons,
-          },
-        })
-        .then((response) => context.commit('setProductsData', response.data))
-        .catch(() => context.commit('setProductsLoadingFailed', true))
-        .then(() => context.commit('setProductsLoading', false))
-    //}, 0);
+    axios
+      .get(API_BASE + "products", {
+        params: {
+          page: context.state.page,
+          limit: context.state.productsPerPage,
+          categoryId: context.state.filterCategory,
+          minPrice: context.state.filterPriceFrom,
+          maxPrice: context.state.filterPriceTo,
+          colorIds: [],//context.state.filterColor,
+          materialIds: context.state.filterMaterials,
+          seasonIds: context.state.filterSeasons,
+        },
+      })
+      .then((response) => context.commit('setProductsData', response.data))
+      .catch(() => context.commit('setProductsLoadingFailed', true))
+      .then(() => context.commit('setProductsLoading', false))
   },
   loadSeasons(context) {
     context.commit('setProductsLoading', true)
@@ -56,4 +53,4 @@ export default {
     .catch(() => context.commit('setProductsLoadingFailed', true))
     .then(() => context.commit('setProductsLoading', false))
   },
-};
+}

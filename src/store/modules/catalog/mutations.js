@@ -20,9 +20,6 @@ export default {
   setFilterMaterials(state, value) {
     state.filterMaterials = value;
   },
-  // setFilterColor(state, value) {
-  //   state.filterColor = value;
-  // },
   setPage(state, value) {
     state.page = value;
   },
@@ -41,4 +38,4 @@ export default {
   setMaterials(state, value) {
     state.materials = value
   },
-};
+}

@@ -4,6 +4,4 @@ export default {
     cartProductsData: [],
     cartLoading: false,
     cartLoadingError: false,
-    orderInfo: null,
-    deliveryData: null,
 }
