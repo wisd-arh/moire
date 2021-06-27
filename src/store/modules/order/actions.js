@@ -27,8 +27,8 @@ export default {
         })    
     },
     loadPayments(context) {
-        var deliveries = context.state.deliveryData
-        var payments = []
+        let deliveries = context.state.deliveryData
+        let payments = []
         deliveries.forEach(deliveryItem => {
 
             axios.get(API_BASE + 'payments', {

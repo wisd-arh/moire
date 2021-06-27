@@ -3,14 +3,14 @@ export default {
         state.cartProducts = []
         state.cartProductsData = []
     },
-    updateCartProductAmount(state, {productId, amount}) {
-        let item = state.cartProducts.find(item => item.productId === productId)
+    updateCartProductAmount(state, {basketItemId, amount}) {
+        let item = state.cartProducts.find(item => item.basketItemId === basketItemId)
         if (item) {
             item.amount = amount
         }   
     },
-    deleteCartProduct(state, productId) {
-        state.cartProducts = state.cartProducts.filter(item => item.productId !== productId)
+    deleteCartProduct(state, basketItemId) {
+        state.cartProducts = state.cartProducts.filter(item => item.basketItemId !== basketItemId)
     },
     updateUserAccessKey(state, accessKey) {
         state.userAccessKey = accessKey
@@ -22,7 +22,8 @@ export default {
         state.cartProducts = state.cartProductsData.map( item => {
             return {
                 productId: item.product.id,
-                amount: item.quantity
+                amount: item.quantity,
+                basketItemId: item.id
             }
         })
     },

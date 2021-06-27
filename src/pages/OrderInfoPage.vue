@@ -125,7 +125,7 @@ export default {
     methods: {
       ...mapActions("order", ["loadOrderInfo"]),
       loadOrderDetails() {
-        var orderInfo = this.orderInfo
+        let orderInfo = this.orderInfo
         if (orderInfo && (orderInfo.id === this.$route.params.id)) {
             return;
         }

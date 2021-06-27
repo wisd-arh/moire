@@ -42,12 +42,12 @@ export default {
             .catch(() => reject())
         })   
     },
-    updateCartProductAmount(context, { productId, amount }) {
+    updateCartProductAmount(context, { basketItemId, amount }) {
         if (amount < 1) return;
-        context.commit('updateCartProductAmount', { productId, amount })
+        context.commit('updateCartProductAmount', { basketItemId, amount })
         return new Promise((resolve, reject) => {
             axios.put(API_BASE + 'baskets/products', 
-            { productId: productId, quantity: amount },
+            { basketItemId: basketItemId, quantity: amount },
             {
                 params: { userAccessKey: context.state.userAccessKey }
             })
@@ -61,15 +61,15 @@ export default {
             })
         })    
     },
-    removeCartProduct(context, productId) {
-        context.commit('deleteCartProduct', productId)
+    removeCartProduct(context, basketItemId) {
+        context.commit('deleteCartProduct', basketItemId)
         return new Promise((resolve, reject) => {
             axios.delete(API_BASE + 'baskets/products', {
                 params: {
                     userAccessKey: context.state.userAccessKey
                 },
                 data: {
-                    productId: productId
+                    basketItemId: basketItemId
                 }
             })
             .then((response) => {

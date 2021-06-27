@@ -131,11 +131,11 @@ export default {
         return this.getDeliveryData ? this.getDeliveryData : []
       },
       currentPayments() {
-        var paymentsData = this.getPayments
-        if (paymentsData) {
-          var currentPaymentsItems = paymentsData.find((payment) => { 
-              return payment.deliveryTypeId === this.formData.deliveryTypeId})
-        }
+        let paymentsData = this.getPayments
+        if (!paymentsData) return []
+        let currentPaymentsItems = paymentsData.find((payment) => { 
+            return payment.deliveryTypeId === this.formData.deliveryTypeId
+          })
         return currentPaymentsItems ? currentPaymentsItems.items : []
       },
     },

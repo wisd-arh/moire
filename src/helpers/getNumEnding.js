@@ -7,7 +7,7 @@
  */
  export default function getNumEnding(iNumber, aEndings)
  {
-     var sEnding, i;
+     let sEnding, i;
      iNumber = iNumber % 100;
      if (iNumber>=11 && iNumber<=19) {
          sEnding=aEndings[2];

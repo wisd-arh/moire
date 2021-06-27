@@ -193,8 +193,10 @@ export default {
     },
     watch: {
         productData() {
-            if (this.productData)
+            if (this.productData) {
                 this.currentColor = this.productData.colors[0].id
+                this.sizeId = this.productData.sizes[0].id
+            }    
         },
         '$route.params.id': {
             handler() {

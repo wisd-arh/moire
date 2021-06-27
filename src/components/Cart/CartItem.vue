@@ -25,7 +25,7 @@
 
     <button class="product__del button-del" 
       type="button" aria-label="Удалить товар из корзины" 
-      @click="deleteProduct(item.productId)">  
+      @click="deleteProduct(item.basketItemId)">  
         <svg width="20" height="20" fill="currentColor">
           <use xlink:href="#icon-close"></use>
         </svg>
@@ -51,12 +51,14 @@ export default {
         return this.item.amount
       },
       set(value) {
-        this.$store.dispatch('cart/updateCartProductAmount', {productId: this.item.productId, amount: value})
+        this.updateAmount({ basketItemId: this.item.basketItemId, amount: value})
       }
     }
   },
   methods: {
-    ...mapActions("cart", {deleteProduct : 'removeCartProduct'})
+    ...mapActions("cart", {deleteProduct : 'removeCartProduct',
+                           updateAmount: 'updateCartProductAmount',   
+    })
   }
 }
 </script>
