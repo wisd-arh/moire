@@ -4,11 +4,11 @@
       <fieldset class="form__block">
         <legend class="form__legend">Цена</legend>
         <label class="form__label form__label--price">
-          <input class="form__input" type="text" name="min-price" v-model.number="currentPriceFrom">
+          <input class="form__input" type="text" name="min-price" v-model.number="currentPriceFrom" placeholder="0">
           <span class="form__value">От</span>
         </label>
         <label class="form__label form__label--price">
-          <input class="form__input" type="text" name="max-price" v-model.number="currentPriceTo">
+          <input class="form__input" type="text" name="max-price" v-model.number="currentPriceTo" placeholder="0">
           <span class="form__value">До</span>
         </label>
       </fieldset>
@@ -67,10 +67,11 @@
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
+  name: 'ProductFilter',
   data() {
     return {
-      currentPriceFrom: 0,
-      currentPriceTo: 0,
+      currentPriceFrom: "",
+      currentPriceTo: "",
       currentCategory: 0,
       currentSeasons: [],
       currentMaterials: [],
@@ -103,8 +104,8 @@ export default {
       this.$emit("update:materials", this.currentMaterials)
     },
     reset() {
-      this.$emit("update:priceFrom", 0)
-      this.$emit("update:priceTo", 0)
+      this.$emit("update:priceFrom", "")
+      this.$emit("update:priceTo", "")
       this.$emit("update:categoryId", 0)
       this.$emit("update:seasons", [])
       this.currentSeasons = [];
