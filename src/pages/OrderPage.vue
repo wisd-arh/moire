@@ -108,6 +108,7 @@ import { API_BASE } from '@/config'
 import LoaderInfo from '@/components/Loaders/LoaderInfo.vue'
 
 export default {
+    name: 'OrderPage',
     components: { AppFormText, AppFormTextarea, CartProductInfo, LoaderInfo },
     filters: { numberFormat },
     data() {
@@ -128,7 +129,7 @@ export default {
         return getNumEnding(this.cartPositionsCount, ['товар', 'товара', 'товаров'])
       },
       deliveries() {
-        return this.getDeliveryData ? this.getDeliveryData : []
+        return this.getDeliveryData || []
       },
       currentPayments() {
         let paymentsData = this.getPayments
@@ -146,7 +147,7 @@ export default {
       delivery_price(id) {
         let delivery = this.deliveries.find(del => { return del.id === id }) 
         if (delivery)
-          return delivery.price == 0 ? "бесплатно" : delivery.price + " ₽"
+          return delivery.price === "0" ? "бесплатно" : delivery.price + " ₽"
       },
       order() {
         this.loading = true
@@ -177,6 +178,10 @@ export default {
     created() {
       this.loadDeliveryData()
         .then(() => { this.loadPayments() })
+        .then(() => {
+          this.formData.deliveryTypeId = this.deliveries[0].id
+          this.formData.paymentTypeId = this.currentPayments[0].id
+        })
       
     }
 }

@@ -11,8 +11,14 @@
       </div>
     </div>
     <div class="content__catalog">
-      <ProductFilter :priceFrom.sync="filterPriceFrom" :priceTo.sync="filterPriceTo" :categoryId.sync="filterCategory"
-        :seasons.sync="filterSeasons" :materials.sync="filterMaterials" /> 
+      <ProductFilter 
+        :priceFrom="filterPriceFrom" 
+        :priceTo="filterPriceTo" 
+        :categoryId="filterCategory"
+        :seasons="filterSeasons" 
+        :materials="filterMaterials" 
+        @updateFilter="updateFilter"
+      /> 
 
       <section class="catalog">
         <div v-if="productsLoading">
@@ -45,6 +51,7 @@ import { mapActions, mapGetters } from "vuex";
 import getNumEnding from "@/helpers/getNumEnding";
 
 export default {
+  name: 'MainPage',
   components: {
     ProductList,
     AppPagination,
@@ -55,21 +62,6 @@ export default {
   watch: {
     countProducts() {
       this.page = 1;
-    },
-    filterPriceFrom() {
-      this.loadProducts();
-    },
-    filterPriceTo() {
-      this.loadProducts();
-    },
-    filterCategory() {
-      this.loadProducts();
-    },
-    filterSeasons() {
-      this.loadProducts();
-    },
-    filterMaterials() {
-      this.loadProducts();
     },
     page() {
       this.loadProducts();
@@ -120,17 +112,25 @@ export default {
       );
     },
     products() {
-      return this.productsData ? this.productsData.items : [];
+      return this.productsData ? this.productsData.items : []
     },
   },
   methods: {
     ...mapActions("catalog", ["loadProducts"]),
     reload() {
-      this.loadProducts();
+      this.loadProducts()
     },
+    updateFilter(newFilter) {
+      this.filterPriceFrom = newFilter.priceFrom
+      this.filterPriceTo = newFilter.priceTo
+      this.filterCategory = newFilter.categoryId
+      this.filterSeasons = newFilter.seasons
+      this.filterMaterials = newFilter.materials
+      this.loadProducts()
+    }
   },
   created() {
-    this.loadProducts();
+    this.loadProducts()
   },
-};
+}
 </script>

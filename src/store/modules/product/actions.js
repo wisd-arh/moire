@@ -10,7 +10,7 @@ export default {
             .then(response => context.commit('setProductData', response.data))
             .catch((err) => { 
                 context.commit('setProductLoadingFailed',  true)
-                if (err.request.status == 404) {
+                if (err.request.status === "404") {
                    this.$router.replace({name: 'notFound', params: { '0': '/' }}) 
                 }
             })
