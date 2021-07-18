@@ -14,8 +14,6 @@ import ProductItem from './ProductItem.vue'
 export default {
   name: 'ProductList',
   props: ['products'],
-  components: {
-      ProductItem
-  }
+  components: { ProductItem }
 }
 </script>

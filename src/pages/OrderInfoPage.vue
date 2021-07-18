@@ -101,6 +101,7 @@ import numberFormat from '@/helpers/numberFormat'
 import getNumEnding from '@/helpers/getNumEnding'
 
 export default {
+    name: 'OrderInfoPage',
     data() {
       return {
         loading: false,
@@ -109,8 +110,10 @@ export default {
     components: { CartProductInfo, LoaderInfo },
     filters: { numberFormat },
     computed: {
-        ...mapGetters("order", { orderInfo: 'getOrderInfo',
-                        orderProducts: 'orderProducts' }),
+        ...mapGetters("order", { 
+          orderInfo: 'getOrderInfo',
+          orderProducts: 'orderProducts' 
+        }),
         ...mapGetters("cart", ["getUserAccessKey"]),
         orderPositionsCount() {
             return this.orderProducts ? this.orderProducts.length : 0
@@ -130,12 +133,14 @@ export default {
             return;
         }
         this.loading = true
-        this.loadOrderInfo({ orderId: this.$route.params.id, 
-                             userAccessKey: this.getUserAccessKey})
-            .catch(() => { 
-                this.$router.replace({name: 'notFound', params: { '0': '/' }})
-            })
-            .then(() => this.loading = false)
+        this.loadOrderInfo({ 
+          orderId: this.$route.params.id, 
+          userAccessKey: this.getUserAccessKey
+        })
+          .catch(() => { 
+              this.$router.replace({name: 'notFound', params: { '0': '/' }})
+          })
+          .then(() => this.loading = false)
       }
     },
     watch: {
@@ -146,6 +151,5 @@ export default {
         immediate: true
       }      
     },
-     
 }
 </script>

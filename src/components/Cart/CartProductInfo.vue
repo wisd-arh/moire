@@ -10,7 +10,8 @@
 import numberFormat from '@/helpers/numberFormat'
 
 export default {
-    props: ['cartItem'],
-    filters: { numberFormat }
+  name: 'CartProductInfo',
+  props: ['cartItem'],
+  filters: { numberFormat }
 }
 </script>

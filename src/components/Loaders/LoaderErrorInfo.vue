@@ -3,7 +3,7 @@
     <p>
       <a @click.prevent="reloadAgain" class="errLink">Попробовать ещё раз</a>
     </p>
-    <div>
+    <div class="loader-img">
       <img src="../../../public/img/icons/SVG-Animation-404-Page.gif"/>
     </div>
   </div>

@@ -28,14 +28,10 @@ import gotoPage from "@/helpers/gotoPage"
 import numberFormat from "@/helpers/numberFormat"
 
 export default {
-  components: {
-    ColorPicker,
-  },
-  name: "ProductItem",
+  name: 'ProductItem',
+  components: { ColorPicker },
   props: ["product"],
-  filters: {
-    numberFormat,
-  },
+  filters: { numberFormat },
   computed: {
     productColors() {
       return this.product.colors;

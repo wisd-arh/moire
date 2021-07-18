@@ -109,7 +109,12 @@ import LoaderInfo from '@/components/Loaders/LoaderInfo.vue'
 
 export default {
     name: 'OrderPage',
-    components: { AppFormText, AppFormTextarea, CartProductInfo, LoaderInfo },
+    components: { 
+      AppFormText, 
+      AppFormTextarea, 
+      CartProductInfo, 
+      LoaderInfo 
+    },
     filters: { numberFormat },
     data() {
         return {
@@ -123,8 +128,16 @@ export default {
         }
     },
     computed: {
-      ...mapGetters("cart", ['cartDetailProducts', 'cartTotalPrice', 'cartPositionsCount', 'getUserAccessKey']),
-      ...mapGetters("order", ['getDeliveryData', 'getPayments']),
+      ...mapGetters("cart", [
+        'cartDetailProducts', 
+        'cartTotalPrice', 
+        'cartPositionsCount', 
+        'getUserAccessKey'
+      ]),
+      ...mapGetters("order", [
+        'getDeliveryData', 
+        'getPayments'
+      ]),
       infoString() {
         return getNumEnding(this.cartPositionsCount, ['товар', 'товара', 'товаров'])
       },
@@ -175,14 +188,12 @@ export default {
         .then(() => this.loading = false)  
       },
     },
-    created() {
-      this.loadDeliveryData()
-        .then(() => { this.loadPayments() })
-        .then(() => {
-          this.formData.deliveryTypeId = this.deliveries[0].id
-          this.formData.paymentTypeId = this.currentPayments[0].id
-        })
-      
+    async created() {
+      await this.loadDeliveryData()
+      await this.loadPayments() 
+
+      this.formData.deliveryTypeId = this.deliveries[0].id
+      this.formData.paymentTypeId = this.currentPayments[0].id
     }
 }
 </script>

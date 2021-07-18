@@ -14,6 +14,6 @@ export default {
                    this.$router.replace({name: 'notFound', params: { '0': '/' }}) 
                 }
             })
-            .then(() => context.commit('setProductLoading', false))
+            .finally(() => context.commit('setProductLoading', false))
     },
 }

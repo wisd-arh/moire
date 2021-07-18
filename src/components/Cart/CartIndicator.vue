@@ -21,9 +21,11 @@ import { mapGetters} from 'vuex'
 export default {
   name: 'CartIndicator',
   computed: {
-    ...mapGetters("cart", { cartLoading: 'getCartLoading', 
-                            cartLoadingError: 'getCartLoadingError',
-                            cartProducts: 'getCartProducts' }),
+    ...mapGetters("cart", { 
+      cartLoading: 'getCartLoading', 
+      cartLoadingError: 'getCartLoadingError',
+      cartProducts: 'getCartProducts' 
+    }),
     amount() {
       return this.cartProducts ? this.cartProducts.length : ""
     }                          

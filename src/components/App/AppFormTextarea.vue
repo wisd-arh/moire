@@ -12,6 +12,7 @@
 import formFieldMixin from '@/mixins/formFieldMixin'
 
 export default {
+  name: 'AppFormTextarea',
   mixins: [formFieldMixin]
 }
 </script>

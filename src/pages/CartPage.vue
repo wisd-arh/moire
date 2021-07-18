@@ -64,25 +64,26 @@ import LoaderInfo from '@/components/Loaders/LoaderInfo.vue'
 import LoaderErrorInfo from '@/components/Loaders/LoaderErrorInfo.vue'
 
 export default {
+    name: 'CartPage',
     components: { CartItem, LoaderInfo, LoaderErrorInfo },
-    filters: {
-      numberFormat
-    },
+    filters: { numberFormat },
     computed: {
-      ...mapGetters("cart", {products: 'cartDetailProducts', 
-                    totalPrice: 'cartTotalPrice',
-                    cartPositionsCount: 'cartPositionsCount', 
-                    cartLoading: 'getCartLoading', 
-                    cartLoadingError: 'getCartLoadingError'}),
+      ...mapGetters("cart", {
+        products: 'cartDetailProducts', 
+        totalPrice: 'cartTotalPrice',
+        cartPositionsCount: 'cartPositionsCount', 
+        cartLoading: 'getCartLoading', 
+        cartLoadingError: 'getCartLoadingError'
+      }),
       cartCount() {
         return this.cartPositionsCount + ' ' + getNumEnding(this.cartPositionsCount, ['товар', 'товара', 'товаров'])
       }                    
     },
     methods: {
-        ...mapActions(['loadCart']),
-        reload() {
-          this.loadCart()
-        }
+      ...mapActions(['loadCart']),
+      reload() {
+        this.loadCart()
+      }
     },
 }
 </script>

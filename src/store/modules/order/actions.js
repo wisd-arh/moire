@@ -27,21 +27,29 @@ export default {
         })    
     },
     loadPayments(context) {
-        let deliveries = context.state.deliveryData
-        let payments = []
-        deliveries.forEach(deliveryItem => {
+        return new Promise((resolve, reject) => {
+            let deliveries = context.state.deliveryData
+            let payments = []
+            deliveries.forEach(deliveryItem => {
 
-            axios.get(API_BASE + 'payments', {
-                params: {
-                    deliveryTypeId: deliveryItem.id
-                }
-            })
-            .then(result => payments.push( 
-                {   items: result.data,
-                    deliveryTypeId: deliveryItem.id   
-                }))
-            .catch(() => payments = [])
-            .then(() => context.commit('setPayments', payments))
-        });
+                axios.get(API_BASE + 'payments', {
+                    params: {
+                        deliveryTypeId: deliveryItem.id
+                    }
+                })
+                .then(result => payments.push( 
+                    {   items: result.data,
+                        deliveryTypeId: deliveryItem.id   
+                    }))
+                .catch(() => { 
+                    payments = [] 
+                    reject() 
+                })
+                .then(() => { 
+                    context.commit('setPayments', payments)
+                })
+            });
+            resolve() // for ALL deliveries
+        })    
     },
 }

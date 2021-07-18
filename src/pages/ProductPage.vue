@@ -124,7 +124,13 @@ import numberFormat from '@/helpers/numberFormat'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
-    components: { AppCounter, ColorPicker, LoaderInfo, LoaderErrorInfo },
+    name: 'ProductPage',
+    components: { 
+        AppCounter, 
+        ColorPicker, 
+        LoaderInfo, 
+        LoaderErrorInfo 
+    },
     data() {
         return {
             productAmount: 1,
@@ -138,7 +144,10 @@ export default {
         numberFormat
     },
     computed: {
-        ...mapGetters("product", {productData: "getProductData", productLoading: "getProductLoading"}),
+        ...mapGetters("product", {
+            productData: "getProductData", 
+            productLoading: "getProductLoading"
+        }),
         colors() {
             return this.productData ? this.productData.colors : []
         },
@@ -188,7 +197,6 @@ export default {
         },
         reload() {
             this.loadProduct(this.$route.params.id)      
-            
         }
     },
     watch: {

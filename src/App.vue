@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="app">
         <AppHeader/>
         <router-view/>
         <AppFooter/>
@@ -12,6 +12,7 @@ import AppHeader from '@/components/App/AppHeader.vue'
 import { mapActions, mapMutations } from 'vuex'
 
 export default {
+    name: 'App',
     components: { AppHeader, AppFooter },
     created() {
         let userAccessKey = localStorage.getItem('userAccessKey')

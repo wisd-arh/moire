@@ -41,10 +41,8 @@ import AppCounter from '@/components/App/AppCounter.vue'
 export default {
   name: 'CartItem',
   props: ['item'],
-  components: {AppCounter},
-  filters: {
-      numberFormat,
-  },
+  components: { AppCounter },
+  filters: { numberFormat },
   computed: {
     amount: {
       get() {
@@ -56,8 +54,9 @@ export default {
     }
   },
   methods: {
-    ...mapActions("cart", {deleteProduct : 'removeCartProduct',
-                           updateAmount: 'updateCartProductAmount',   
+    ...mapActions("cart", {
+      deleteProduct : 'removeCartProduct',
+      updateAmount: 'updateCartProductAmount',   
     })
   }
 }

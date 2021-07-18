@@ -13,6 +13,7 @@
 import formFieldMixin from '@/mixins/formFieldMixin'
 
 export default {
+  name: 'AppFormText',
   props: { 
     type: {
       default: 'text'
