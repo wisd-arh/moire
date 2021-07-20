@@ -27,10 +27,10 @@
       <form class="cart__form form" action="#" method="POST" @submit.prevent='order'>
         <div class="cart__field">
           <div class="cart__data">
-            <AppFormText v-model="formData.name" title="ФИО" :error="formError.name" placeholder="Введите ваше полное имя"/>
-            <AppFormText v-model="formData.address" title="Адрес доставки" :error="formError.address" placeholder="Введите ваш адрес"/>
-            <AppFormText v-model="formData.phone" title="Телефон" type="tel" :error="formError.phone" placeholder="Введите ваш телефон"/>
-            <AppFormText v-model="formData.email" title="Email" type="email" :error="formError.email" placeholder="Введи ваш Email"/>
+            <AppFormText v-model="formData.name" title="ФИО" :error="formError.name" placeholder="Иванов Иван Иванович"/>
+            <AppFormText v-model="formData.address" title="Адрес доставки" :error="formError.address" placeholder="г. Москва, Ленинский проспект, дом 6, строение 20"/>
+            <AppFormText v-model="formData.phone" title="Телефон" type="tel" :error="formError.phone" placeholder="+79876543210"/>
+            <AppFormText v-model="formData.email" title="Email" type="email" :error="formError.email" placeholder="user@mail.ru"/>
             <AppFormTextarea v-model="formData.comment" title="Комментарий к заказу" :error="formError.comment" placeholder="Ваши пожелания"/>
           </div>
 
