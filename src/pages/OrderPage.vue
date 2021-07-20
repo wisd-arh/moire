@@ -1,8 +1,8 @@
 <template>
-  <main class="content container" v-if="loading">
+  <!-- <main class="content container" v-if="loading">
     <LoaderInfo title="Отправка заказа на сервер"/>
-  </main>
-  <main class="content container" v-else>
+  </main> -->
+  <main class="content container">
     <div class="content__top">
       <ul class="breadcrumbs">
         <li class="breadcrumbs__item">
@@ -82,9 +82,11 @@
             <p>Итого: <b>{{ cartPositionsCount }}</b> {{ infoString }} на сумму <b>{{ cartTotalPrice | numberFormat }} ₽</b></p>
           </div>
 
-          <button class="cart__button button button--primery" type="submit">
-            Оформить заказ
-          </button>
+          <AppSubmit
+            class="cart__button button button--primery"
+            title="Оформить заказ"
+            :loader="loading"
+          />
         </div>
         <div class="cart__error form__error-block" v-if="formErrorMessage">
           <h4>Заявка не отправлена!</h4>
@@ -98,6 +100,7 @@
 </template>
 <script>
 import AppFormText from '@/components/App/AppFormText.vue'
+import AppSubmit from '@/components/App/AppSubmit.vue'
 import AppFormTextarea from '@/components/App/AppFormText.vue'
 import CartProductInfo from '@/components/Cart/CartProductInfo.vue'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
@@ -105,7 +108,7 @@ import numberFormat from '@/helpers/numberFormat'
 import getNumEnding from '@/helpers/getNumEnding'
 import axios from 'axios'
 import { API_BASE } from '@/config'
-import LoaderInfo from '@/components/Loaders/LoaderInfo.vue'
+//import LoaderInfo from '@/components/Loaders/LoaderInfo.vue'
 
 export default {
     name: 'OrderPage',
@@ -113,7 +116,8 @@ export default {
       AppFormText, 
       AppFormTextarea, 
       CartProductInfo, 
-      LoaderInfo 
+  //    LoaderInfo,
+      AppSubmit 
     },
     filters: { numberFormat },
     data() {

@@ -83,9 +83,11 @@
         </ul>
       </fieldset>
 
-      <button class="filter__submit button button--primery" type="submit">
-        Применить
-      </button>
+      <AppSubmit 
+        class="filter__submit button button--primery" 
+        title="Применить" 
+        :loader="loading"
+      />
       <button class="filter__reset button button--second" type="button" @click="reset">
         Сбросить
       </button>
@@ -95,9 +97,11 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import AppSubmit from "../App/AppSubmit.vue"
 
 export default {
   name: 'ProductFilter',
+  components: { AppSubmit },
   data() {
     return {
       currentPriceFrom: "",
@@ -123,7 +127,8 @@ export default {
     ...mapGetters("catalog", {
       seasons: "getSeasons",
       categories: "getProductCategories",
-      materials: "getMaterials"
+      materials: "getMaterials",
+      loading: "getProductsLoading",
     }),
   },
   methods: {

@@ -22,7 +22,7 @@
 
       <section class="catalog">
         <div v-if="productsLoading">
-          <LoaderInfo title="Загрузка товаров" />
+          Загрузка товаров
         </div>
         <div v-if="productsLoadingFailed">
           <LoaderErrorInfo
@@ -45,7 +45,7 @@
 import ProductList from "@/components/Product/ProductList.vue";
 import AppPagination from "@/components/App/AppPagination.vue";
 import ProductFilter from '@/components/Product/ProductFilter.vue'
-import LoaderInfo from "@/components/Loaders/LoaderInfo.vue";
+//import LoaderInfo from "@/components/Loaders/LoaderInfo.vue";
 import LoaderErrorInfo from "@/components/Loaders/LoaderErrorInfo.vue";
 import { mapActions, mapGetters } from "vuex";
 import getNumEnding from "@/helpers/getNumEnding";
@@ -56,7 +56,7 @@ export default {
     ProductList,
     AppPagination,
     ProductFilter,
-    LoaderInfo,
+//    LoaderInfo,
     LoaderErrorInfo,
   },
   watch: {

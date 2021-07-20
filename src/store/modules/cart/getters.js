@@ -27,6 +27,6 @@ export default {
         return state.cartProducts.length
     },
     getUserAccessKey(state) {
-        return state.userAccessKey ? state.userAccessKey : localStorage.getItem('userAccessKey')
+        return state.userAccessKey || localStorage.getItem('userAccessKey')
     },
 }
