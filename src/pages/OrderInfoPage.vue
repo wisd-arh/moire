@@ -1,17 +1,23 @@
 <template>
-  <main class="content container" v-if="loading">
+  <main class="content container" 
+    v-if="loading"
+  >
     <LoaderInfo title="Получение информации" />
   </main>
   <main class="content container" v-else>
     <div class="content__top">
       <ul class="breadcrumbs">
         <li class="breadcrumbs__item">
-          <router-link class="breadcrumbs__link" :to="{name: 'main'}">
+          <router-link class="breadcrumbs__link" 
+            :to="{name: 'main'}"
+          >
             Каталог
           </router-link>
         </li>
         <li class="breadcrumbs__item">
-          <router-link class="breadcrumbs__link" :to="{name: 'cart'}">
+          <router-link class="breadcrumbs__link" 
+            :to="{name: 'cart'}"
+          >
             Корзина
           </router-link>
         </li>
@@ -22,20 +28,27 @@
         </li>
       </ul>
 
-      <h1 class="content__title" v-if="orderInfo">
+      <h1 class="content__title" 
+        v-if="orderInfo"
+      >
         Заказ оформлен <span>№ {{ orderInfo.id }}</span>
       </h1>
     </div>
 
     <section class="cart">
-      <form class="cart__form form" action="#" method="POST">
+      <form class="cart__form form" 
+        action="#" 
+        method="POST"
+      >
         <div class="cart__field">
           <p class="cart__message">
             Благодарим за&nbsp;выбор нашего магазина. На&nbsp;Вашу почту придет письмо с&nbsp;деталями заказа. 
             Наши менеджеры свяжутся с&nbsp;Вами в&nbsp;течение часа для уточнения деталей доставки.
           </p>
 
-          <ul class="dictionary" v-if="orderInfo">
+          <ul class="dictionary" 
+            v-if="orderInfo"
+          >
             <li class="dictionary__item">
               <span class="dictionary__key">
                 Получатель
@@ -78,13 +91,19 @@
             </li>
           </ul>
         </div>
-
         <div class="cart__block">
-          <ul class="cart__orders" v-if="orderPositionsCount">
-            <CartProductInfo v-for="item in orderProducts" :cartItem="item" :key="item.id"/>              
+          <ul class="cart__orders" 
+            v-if="orderPositionsCount"
+          >
+            <CartProductInfo 
+              v-for="item in orderProducts" 
+              :cartItem="item" 
+              :key="item.id"
+            />
           </ul>
-          
-          <div class="cart__total" v-if="orderPositionsCount">
+          <div class="cart__total" 
+            v-if="orderPositionsCount"
+          >
             <p>Доставка: <b>500 ₽</b></p>
             <p>Итого: <b>{{ orderPositionsCount }}</b> {{ infoString }} на сумму <b>{{ orderTotalPrice | numberFormat }} ₽</b></p>
           </div>

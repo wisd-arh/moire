@@ -1,7 +1,9 @@
 <template>
   <div>{{ title }}
     <p>
-      <a @click.prevent="reloadAgain" class="errLink">Попробовать ещё раз</a>
+      <a class="errLink"
+        @click.prevent="reloadAgain" 
+      >Попробовать ещё раз</a>
     </p>
     <div class="loader-img">
       <img src="../../../public/img/icons/SVG-Animation-404-Page.gif"/>

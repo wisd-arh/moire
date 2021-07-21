@@ -1,6 +1,9 @@
 <template>
   <ul>
-    <li class="colors__item" v-for="color in colors" :key="color.id">
+    <li class="colors__item" 
+      v-for="color in colors" 
+      :key="color.id"
+    >
       <label class="colors__label">
         <input class="colors__radio sr-only" 
           type="radio" 

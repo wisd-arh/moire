@@ -1,6 +1,10 @@
 <template>
   <aside class="filter">
-    <form class="filter__form form" action="#" method="get" @submit.prevent="submit">
+    <form class="filter__form form" 
+      action="#" 
+      method="get" 
+      @submit.prevent="submit"
+    >
       <fieldset class="form__block">
         <legend class="form__legend">Цена</legend>
         <label class="form__label form__label--price">
@@ -26,7 +30,11 @@
       <fieldset class="form__block">
         <legend class="form__legend">Категория</legend>
         <label class="form__label form__label--select">
-          <select class="form__select" type="text" name="category" v-model="currentCategory">
+          <select class="form__select" 
+            type="text" 
+            name="category" 
+            v-model="currentCategory"
+          >
             <option value="0">Все категории</option>
             <option :value="category.id" 
               v-for="category in categories" 
@@ -64,7 +72,10 @@
       <fieldset class="form__block">
         <legend class="form__legend">Коллекция</legend>
         <ul class="check-list">
-          <li class="check-list__item" v-for="season in seasons" :key="season.id">
+          <li class="check-list__item" 
+            v-for="season in seasons" 
+            :key="season.id"
+          >
             <label class="check-list__label">
               <input 
                 class="check-list__check sr-only" 
@@ -88,7 +99,10 @@
         title="Применить" 
         :loader="loading"
       />
-      <button class="filter__reset button button--second" type="button" @click="reset">
+      <button class="filter__reset button button--second" 
+        type="button" 
+        @click="reset"
+      >
         Сбросить
       </button>
     </form>

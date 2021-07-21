@@ -1,7 +1,12 @@
 <template>
   <li class="cart__item product">
     <div class="product__pic">
-      <img :src="item.product.color.gallery[0].file.url" width="120" height="120" :alt="item.product.title">
+      <img 
+        :src="item.product.color.gallery[0].file.url" 
+        width="120" 
+        height="120" 
+        :alt="item.product.title"
+      >
     </div>
     <h3 class="product__title">
       {{ item.product.title }}
@@ -17,18 +22,23 @@
       Артикул: {{ item.productId }}
     </span>
 
-    <AppCounter class="product__counter form__counter" :amount.sync="amount"/>
+    <AppCounter 
+      class="product__counter form__counter" 
+      :amount.sync="amount"
+    />
 
     <b class="product__price">
       {{ (item.amount * item.product.price) | numberFormat }} ₽
     </b>
 
     <button class="product__del button-del" 
-      type="button" aria-label="Удалить товар из корзины" 
-      @click="deleteProduct(item.basketItemId)">  
-        <svg width="20" height="20" fill="currentColor">
-          <use xlink:href="#icon-close"></use>
-        </svg>
+      type="button" 
+      aria-label="Удалить товар из корзины" 
+      @click="deleteProduct(item.basketItemId)"
+    >  
+      <svg width="20" height="20" fill="currentColor">
+        <use xlink:href="#icon-close"></use>
+      </svg>
     </button>
   </li>
 </template>
@@ -49,7 +59,10 @@ export default {
         return this.item.amount
       },
       set(value) {
-        this.updateAmount({ basketItemId: this.item.basketItemId, amount: value})
+        this.updateAmount({ 
+          basketItemId: this.item.basketItemId, 
+          amount: value
+        })
       }
     }
   },

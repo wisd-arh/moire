@@ -1,5 +1,7 @@
 <template>
-  <AppFormField :title="title" :error="error">
+  <AppFormField :title="title" 
+    :error="error"
+  >
     <textarea v-model="dataValue"
       class="form__input form__input--area"
       name="name"

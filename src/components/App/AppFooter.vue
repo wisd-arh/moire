@@ -74,17 +74,26 @@
       
       <ul class="footer__data">
         <li>
-          <a class="footer__link" href="#" target="_blank" rel="noopener" type="application/pdf">
+          <a class="footer__link" 
+            href="#" 
+            target="_blank" 
+            rel="noopener" 
+            type="application/pdf"
+          >
             Политика конфиденциальности
           </a>
         </li>
         <li>
-          <a class="footer__link" href="#" target="_blank" rel="noopener" type="application/pdf">
+          <a class="footer__link" 
+            href="#" 
+            target="_blank" 
+            rel="noopener" 
+            type="application/pdf"
+          >
             Публичная оферта
           </a>
         </li>
       </ul>
-
       <span class="footer__copyright">
         © 2020 Moire
       </span>
