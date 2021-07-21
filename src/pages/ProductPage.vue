@@ -3,7 +3,10 @@
         <LoaderInfo title="Загрузка товара." />
     </main>
     <main class="content container" v-else-if="!productData">
-        <LoaderErrorInfo title='Ошибка при загрузке информации...' v-on:reload="reload"/>
+        <LoaderErrorInfo 
+            title='Ошибка при загрузке информации...' 
+            v-on:reload="reload"
+        />
     </main>
     <main class="content container" v-else>
         <div class="content__top">
@@ -55,7 +58,11 @@
                 <div class="item__row">
                 <fieldset class="form__block">
                     <legend class="form__legend">Цвет</legend>
-                    <ColorPicker class="colors colors--black" :colors="colors" :currentColor.sync="currentColor"/>
+                    <ColorPicker 
+                        class="colors colors--black" 
+                        :colors="colors" 
+                        :currentColor.sync="currentColor"
+                    />
                 </fieldset>
 
 
@@ -80,12 +87,12 @@
             <ul class="tabs">
             <li class="tabs__item">
                 <a class="tabs__link tabs__link--current">
-                Информация о товаре
+                    Информация о товаре
                 </a>
             </li>
             <li class="tabs__item">
                 <a class="tabs__link" href="#">
-                Доставка и возврат
+                    Доставка и возврат
                 </a>
             </li>
             </ul>
