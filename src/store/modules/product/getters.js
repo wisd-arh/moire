@@ -5,12 +5,6 @@ export default {
     getProductLoading(state) {
         return state.productLoading
     },
-    getProductLoadingFailed(state) {
-        return state.productLoadingFailed
-    },
-    getProductAdded(state) {
-        return state.productAdded
-    },
     getProductAddSending(state) {
         return state.productAddSending
     },

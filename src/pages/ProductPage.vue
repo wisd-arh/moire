@@ -106,12 +106,21 @@
               </fieldset>
             </div>
               
-            <button class="item__button button button--primery" 
-              type="submit" 
-              :disabled="productAddSending"
+            <AppSubmit 
+              class="item__button button button--primery" 
+              title="В корзину"
+              :loader="productAddSending"
+            />
+            <div class="message-info"
+              v-if="productAdded && !productAddSendingError"
             >
-              В корзину
-            </button>
+              Товар добавлен в корзину.
+            </div>
+            <div class="message-error"
+              v-if="!productAdded && productAddSendingError"
+            >
+              Что-то пошло не так. Попробуйте, повторить.
+            </div>
           </form>
         </div>
       </div>
@@ -157,10 +166,12 @@ import LoaderErrorInfo from '@/components/Loaders/LoaderErrorInfo.vue'
 import gotoPage from '@/helpers/gotoPage'
 import numberFormat from '@/helpers/numberFormat'
 import { mapActions, mapGetters } from 'vuex'
+import AppSubmit from "@/components/App/AppSubmit.vue"
 
 export default {
   name: 'ProductPage',
   components: { 
+    AppSubmit,
     AppCounter, 
     ColorPicker, 
     LoaderInfo, 
@@ -173,6 +184,7 @@ export default {
       sizeId: '',
       productAdded: false,
       productAddSending: false,
+      productAddSendingError: false,
     }
   },
   filters: {
@@ -218,6 +230,7 @@ export default {
     addToCart() {
       this.productAdded = false
       this.productAddSending = true
+      this.productAddSendingError = false
       this.addProductToCart({ 
         productId: this.product.id, 
         colorId: this.currentColorId.color.id, 
@@ -228,9 +241,11 @@ export default {
           this.productAdded = true
           this.productAddSending = false
         })
-        .catch(() => {
+        .catch((err) => {
+          console.log(err)
           this.productAdded = false
           this.productAddSending = false
+          this.productAddSendingError = true
         })
     },
     reload() {
@@ -253,3 +268,14 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.message-error {
+  color: red;
+  margin-top: 10px;
+}
+.message-info {
+  color: green;
+  margin-top: 10px;
+}
+</style>

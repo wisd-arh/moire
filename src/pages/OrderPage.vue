@@ -1,7 +1,4 @@
 <template>
-  <!-- <main class="content container" v-if="loading">
-    <LoaderInfo title="Отправка заказа на сервер"/>
-  </main> -->
   <main class="content container">
     <div class="content__top">
       <ul class="breadcrumbs">
@@ -154,7 +151,6 @@ import numberFormat from '@/helpers/numberFormat'
 import getNumEnding from '@/helpers/getNumEnding'
 import axios from 'axios'
 import { API_BASE } from '@/config'
-//import LoaderInfo from '@/components/Loaders/LoaderInfo.vue'
 
 export default {
     name: 'OrderPage',
@@ -162,15 +158,14 @@ export default {
       AppFormText, 
       AppFormTextarea, 
       CartProductInfo, 
-  //    LoaderInfo,
       AppSubmit 
     },
     filters: { numberFormat },
     data() {
         return {
             formData: {
-              "deliveryTypeId": 0,
-              "paymentTypeId": "card",              
+              deliveryTypeId: null,
+              paymentTypeId: null              
             },
             formError: {},
             formErrorMessage: '',
@@ -241,12 +236,25 @@ export default {
         .then(() => this.loading = false)  
       },
     },
+    watch: {
+      currentPayments() {
+        if (!this.formData.paymentTypeId && this.currentPayments)
+          this.formData.paymentTypeId = this.currentPayments[0].id
+      },
+      'formData.deliveryTypeId': {
+        deep: true,
+        handler(value) {
+          if (value && this.currentPayments[0]) 
+            this.formData.paymentTypeId = this.currentPayments[0].id 
+          else   
+            this.formData.paymentTypeId = null
+        }
+      }
+    },
     async created() {
       await this.loadDeliveryData()
       await this.loadPayments() 
-
       this.formData.deliveryTypeId = this.deliveries[0].id
-      this.formData.paymentTypeId = this.currentPayments[0].id
     }
 }
 </script>

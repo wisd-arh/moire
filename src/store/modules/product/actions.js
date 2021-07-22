@@ -8,7 +8,8 @@ export default {
 
         axios.get(API_BASE + 'products/' + productId)
             .then(response => context.commit('setProductData', response.data))
-            .catch((err) => { 
+            .catch((err) => {
+                console.log(err) 
                 context.commit('setProductLoadingFailed',  true)
                 if (err.request.status === "404") {
                    this.$router.replace({name: 'notFound', params: { '0': '/' }}) 

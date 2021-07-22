@@ -156,8 +156,9 @@ export default {
           orderId: this.$route.params.id, 
           userAccessKey: this.getUserAccessKey
         })
-          .catch(() => { 
-              this.$router.replace({name: 'notFound', params: { '0': '/' }})
+          .catch((err) => { 
+            console.log(err)
+            this.$router.replace({name: 'notFound', params: { '0': '/' }})
           })
           .then(() => this.loading = false)
       }

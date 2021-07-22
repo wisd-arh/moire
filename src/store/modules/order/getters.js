@@ -17,6 +17,7 @@ export default {
                     productId: item.product.id
                 }
             })
-        } else { return []; }    
+        } 
+        return []     
     },
 }

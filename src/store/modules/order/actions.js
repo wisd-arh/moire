@@ -10,7 +10,10 @@ export default {
             .then(response => { context.commit('updateOrderInfo', response.data)
                 resolve()
             })
-            .catch(() => reject())
+            .catch((err) => {
+                console.log(err)
+                reject()
+            })
         })   
     },
     loadDeliveryData(context) {
@@ -20,7 +23,8 @@ export default {
                 context.commit('setDeliveryData', response.data)
                 resolve()
             })
-            .catch(() => { 
+            .catch((err) => { 
+                console.log(err)
                 context.commit('setDeliveryData', null)
                 reject() 
             })
@@ -41,7 +45,8 @@ export default {
                     {   items: result.data,
                         deliveryTypeId: deliveryItem.id   
                     }))
-                .catch(() => { 
+                .catch((err) => { 
+                    console.log(err)
                     payments = [] 
                     reject() 
                 })

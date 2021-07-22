@@ -14,13 +14,16 @@ export default {
           categoryId: context.state.filterCategory,
           minPrice: context.state.filterPriceFrom,
           maxPrice: context.state.filterPriceTo,
-          colorIds: [],//context.state.filterColor,
+          colorIds: [],
           materialIds: context.state.filterMaterials,
           seasonIds: context.state.filterSeasons,
         },
       })
       .then((response) => context.commit('setProductsData', response.data))
-      .catch(() => context.commit('setProductsLoadingFailed', true))
+      .catch((err) => {
+        console.log(err)
+        context.commit('setProductsLoadingFailed', true)
+      })
       .then(() => context.commit('setProductsLoading', false))
   },
   loadSeasons(context) {
@@ -30,7 +33,10 @@ export default {
       .get(API_BASE + "seasons", {
     })
     .then((response) => context.commit('setSeasons', response.data))
-    .catch(() => context.commit('setProductsLoadingFailed', true))
+    .catch((err) => {
+      console.log(err)
+      context.commit('setProductsLoadingFailed', true)
+    })
     .then(() => context.commit('setProductsLoading', false))
   },
   loadProductCategories(context) {
@@ -40,7 +46,10 @@ export default {
       .get(API_BASE + "productCategories", {
     })
     .then((response) => context.commit('setProductCategories', response.data))
-    .catch(() => context.commit('setProductsLoadingFailed', true))
+    .catch((err) => {
+      console.log(err)
+      context.commit('setProductsLoadingFailed', true)
+    })
     .then(() => context.commit('setProductsLoading', false))
   },
   loadMaterials(context) {
@@ -50,7 +59,10 @@ export default {
       .get(API_BASE + "materials", {
     })
     .then((response) => context.commit('setMaterials', response.data))
-    .catch(() => context.commit('setProductsLoadingFailed', true))
+    .catch((err) => {
+      console.log(err)
+      context.commit('setProductsLoadingFailed', true)
+    })
     .then(() => context.commit('setProductsLoading', false))
   },
 }

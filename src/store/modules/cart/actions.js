@@ -16,7 +16,8 @@ export default {
                 context.commit('syncCartProducts')
                 context.commit('updateLoadingStatus', {loading: false, error: false})
             })    
-            .catch(() => { 
+            .catch((err) => { 
+                console.log(err)
                 context.commit('updateLoadingStatus', {loading: false, error: true})
             })
     },
@@ -39,7 +40,10 @@ export default {
             .then(response => { context.commit('updateOrderInfo', response.data)
                 resolve()
             })
-            .catch(() => reject())
+            .catch((err) => {
+                console.log(err)
+                reject()
+            })
         })   
     },
     updateCartProductAmount(context, { basketItemId, amount }) {
@@ -55,7 +59,8 @@ export default {
                 context.commit('updateCartProductsData', response.data.items)
                 resolve()
             })
-            .catch(() => {
+            .catch((err) => {
+                console.log(err)
                 context.commit('syncCartProducts')
                 reject()
             })
@@ -76,7 +81,8 @@ export default {
                 context.commit('updateCartProductsData', response.data.items)
                 resolve()
             })
-            .catch(() => { 
+            .catch((err) => { 
+                console.log(err)
                 context.commit('syncCartProducts')
                 reject() 
             })

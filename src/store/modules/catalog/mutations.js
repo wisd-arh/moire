@@ -23,9 +23,6 @@ export default {
   setPage(state, value) {
     state.page = value;
   },
-  setProductsPerPage(state, value) {
-    state.productsPerPage = value;
-  },
   setProductsData(state, value) {
     state.productsData = value;
   },
