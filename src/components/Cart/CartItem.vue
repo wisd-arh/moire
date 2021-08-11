@@ -5,11 +5,11 @@
         :src="item.product.color.gallery[0].file.url" 
         width="120" 
         height="120" 
-        :alt="item.product.title"
+        :alt="item.product.product.title"
       >
     </div>
     <h3 class="product__title">
-      {{ item.product.title }}
+      {{ item.product.product.title }}
     </h3>
     <p class="product__info product__info--color">
       Цвет: 
@@ -19,7 +19,7 @@
       </span>
     </p>
     <span class="product__code">
-      Артикул: {{ item.productId }}
+      Артикул: {{ item.productId }} Размер: {{ item.product.size.title }}
     </span>
 
     <AppCounter 

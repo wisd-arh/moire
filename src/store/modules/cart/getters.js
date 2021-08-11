@@ -10,7 +10,7 @@ export default {
     },
     cartDetailProducts(state) {
         return state.cartProducts.map(item => {
-            const product =  state.cartProductsData.find(p => p.product.id === item.productId)
+            const product =  state.cartProductsData.find(p => p.id === item.basketItemId)
             return {
                 ...item,
                 product: {

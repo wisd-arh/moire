@@ -49,7 +49,7 @@
             <ul class="cart__list">
               <CartItem 
                 v-for="item in products" 
-                :key="item.productId" 
+                :key="item.basketItemId" 
                 :item="item"
               />
             </ul>
