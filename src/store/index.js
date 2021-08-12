@@ -13,10 +13,6 @@ const store = new Vuex.Store({
         order,
         product
     },
-    state: {},
-    actions: {},
-    mutations: {},
-    getters: {}
 })
 
 export default store
